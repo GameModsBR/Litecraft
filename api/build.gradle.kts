@@ -3,17 +3,22 @@ plugins {
 }
 
 subprojects {
-    apply(plugin = "kotlin")
-    
-    if (path != ":api:core") {
-        dependencies {
-            api(project(":api:core"))
+    if (!path.startsWith(":api:jigsaw")) {
+        apply(plugin = "kotlin")
+
+        if (path != ":api:core") {
+            dependencies {
+                api(project(":api:core"))
+            }
         }
     }
 }
 
 dependencies {
+//    api(project(":api:core"))
     subprojects.forEach {
-        api(project(it.path))
+        if (!it.path.startsWith(":api:jigsaw")) {
+            this.api(project(it.path))
+        }
     }
 }
