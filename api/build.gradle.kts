@@ -15,7 +15,6 @@ subprojects {
 }
 
 dependencies {
-//    api(project(":api:core"))
     subprojects.forEach {
         if (!it.path.startsWith(":api:jigsaw")) {
             this.api(project(it.path))
