@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE attributes SYSTEM "attributes.dtd">
+<attributes>
+    <attribute id="snowy">
+        <boolean/>
+    </attribute>
+    <attribute id="burnable_wood">
+        <fixed value="oak"/>
+        <fixed value="birch"/>
+        <fixed value="spruce"/>
+        <fixed value="jungle"/>
+        <fixed value="acacia"/>
+        <fixed value="dark_oak"/>
+    </attribute>
+    <attribute id="fireproof_wood">
+        <fixed value="crismon"/>
+        <fixed value="warped"/>
+    </attribute>
+    <attribute id="wood">
+        <copy from="burnable_wood fireproof_wood"/>
+    </attribute>
+    <attribute id="sapling_age">
+        <sequence from="0" to="1"/>
+    </attribute>
+    <attribute id="liquid_falling">
+        <boolean/>
+    </attribute>
+    <attribute id="liquid_level">
+        <sequence from="1" to="8"/>
+    </attribute>
+    <attribute id="stripped">
+        <boolean/>
+    </attribute>
+    <attribute id="axis">
+        <fixed value="x"/>
+        <fixed value="y"/>
+        <fixed value="z"/>
+    </attribute>
+    <attribute id="bark">
+        <fixed value="log"/>
+        <fixed value="full"/>
+    </attribute>
+    <attribute id="leaves_distance">
+        <sequence from="1" to="7"/>
+    </attribute>
+    <attribute id="leaves_persistent">
+        <boolean/>
+    </attribute>
+    <attribute id="color">
+        <fixed value="white"/>
+        <fixed value="orange"/>
+        <fixed value="magenta"/>
+        <fixed value="light_blue"/>
+        <fixed value="yellow"/>
+        <fixed value="lime"/>
+        <fixed value="pink"/>
+        <fixed value="gray"/>
+        <fixed value="light_gray"/>
+        <fixed value="cyan"/>
+        <fixed value="purple"/>
+        <fixed value="blue"/>
+        <fixed value="brown"/>
+        <fixed value="green"/>
+        <fixed value="red"/>
+        <fixed value="black"/>
+    </attribute>
+    <attribute id="powered">
+        <boolean/>
+    </attribute>
+    <attribute id="horizontal">
+        <fixed value="east"/>
+        <fixed value="west"/>
+        <fixed value="north"/>
+        <fixed value="south"/>
+    </attribute>
+    <attribute id="vertical">
+        <fixed value="up"/>
+        <fixed value="down"/>
+    </attribute>
+    <attribute id="bubble_direction">
+        <copy from="vertical"/>
+    </attribute>
+    <attribute id="facing">
+        <copy from="horizontal"/>
+    </attribute>
+    <attribute id="occupied">
+        <boolean/>
+    </attribute>
+    <attribute id="bed_part">
+        <fixed value="foot"/>
+        <fixed value="head"/>
+    </attribute>
+    <attribute id="block_face">
+        <fixed value="down"/>
+        <fixed value="up"/>
+        <copy from="horizontal"/>
+    </attribute>
+    <attribute id="sandstone_variant">
+        <fixed value="normal"/>
+        <fixed value="cut"/>
+        <fixed value="chiseled"/>
+        <fixed value="smooth"/>
+    </attribute>
+    <attribute id="sand_color">
+        <fixed value="yellow"/>
+        <fixed value="red"/>
+    </attribute>
+    <attribute id="note">
+        <sequence from="0" to="24"/>
+    </attribute>
+    <attribute id="instrument">
+        <fixed value="banjo"/>
+        <fixed value="basedrum"/>
+        <fixed value="bass"/>
+        <fixed value="bell"/>
+        <fixed value="bit"/>
+        <fixed value="chime"/>
+        <fixed value="cow_bell"/>
+        <fixed value="didgeridoo"/>
+        <fixed value="flute"/>
+        <fixed value="guitar"/>
+        <fixed value="harp"/>
+        <fixed value="hat"/>
+        <fixed value="iron_xylophone"/>
+        <fixed value="pling"/>
+        <fixed value="snare"/>
+        <fixed value="xylophone"/>
+    </attribute>
+    <attribute id="snow_layers">
+        <sequence from="1" to="8"/>
+    </attribute>
+    <attribute id="moisture">
+        <sequence from="0" to="7"/>
+    </attribute>
+    <attribute id="straight_rail">
+        <fixed value="east_west"/>
+        <fixed value="north_south"/>
+        <fixed value="ascending_east"/>
+        <fixed value="ascending_north"/>
+        <fixed value="ascending_west"/>
+    </attribute>
+    <attribute id="turning_rail">
+        <copy from="straight_rail"/>
+        <fixed value="north_east"/>
+        <fixed value="north_west"/>
+        <fixed value="south_east"/>
+        <fixed value="south_west"/>
+    </attribute>
+</attributes>

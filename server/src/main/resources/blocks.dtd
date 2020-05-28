@@ -1,0 +1,332 @@
+<!-- ###################   ENTITIES   ################### --> 
+<!ENTITY % tools "pickaxe|axe|shovel|sword|hoe|shears|hand|any|none">
+<!ENTITY % tier   "wooden|stone|iron|diamond|netherite|golden|any|none">
+<!ENTITY % cardinal   "north|south|east|west">
+<!ENTITY % block-face   "north|south|east|west|up|down">
+<!ENTITY % bool   "true|false">
+
+<!-- ###################   BASIC   ################### -->
+<!ELEMENT blocks (block+)>
+
+<!ELEMENT block (name?,properties,attribute*,traits*,state-override*)?>
+<!ATTLIST block
+        id ID #REQUIRED
+        tags NMTOKENS #IMPLIED
+>
+
+<!ELEMENT state-override (state-attribute+,name?,properties?,traits*)>
+<!ATTLIST state-override
+        type    (add|remove|replace)    #REQUIRED
+        tags    NMTOKENS                #IMPLIED
+>
+
+<!ELEMENT name (#PCDATA|attribute|state)*>
+
+<!-- ###################   PROPERTIES   ################### -->
+<!ELEMENT properties (mining|lighting|flammable|fireproof|waterlogging|hitbox|collision|support|direction|velocity)+>
+
+<!ELEMENT velocity EMPTY>
+<!ATTLIST velocity
+        slipperiness            CDATA       '0.6'
+        multiplier              CDATA       '1.0'
+        vertical-bounciness     CDATA       '0'
+        fall-damage-multiplier   CDATA       '0'
+>
+
+<!ELEMENT waterlogging (flow-to*)>
+<!ATTLIST waterlogging
+        flowing     (blocks|pops|pass)      #REQUIRED
+        source      (blocks|pops|pass)      #REQUIRED
+>
+
+<!ELEMENT flow-to EMPTY>
+<!ATTLIST flow-to direction (%cardinal;) #REQUIRED>
+
+<!ELEMENT support (supported-by+,unsupported-by*)>
+
+<!ELEMENT supported-by (relative-position*,solid-block*,state*)>
+<!ATTLIST supported-by
+        tags        NMTOKENS        #IMPLIED
+>
+
+<!ELEMENT unsupported-by (relative-position*,solid-block*,state*)>
+<!ATTLIST unsupported-by
+        tags        NMTOKENS        #IMPLIED
+>
+
+<!ELEMENT except (state*)>
+<!ATTLIST except
+        tags        NMTOKENS        #IMPLIED
+>
+
+<!ELEMENT solid-block (relative-position*,except*)>
+
+<!ELEMENT relative-position  EMPTY>
+<!ATTLIST relative-position
+        at (behind|front|right|left|above|bellow|%block-face;) #REQUIRED
+>
+
+<!ELEMENT mining EMPTY>
+<!ATTLIST mining
+        tool            (%tools;)   #REQUIRED
+        alt-tool        (%tools;)   'none'
+        tier            (%tier;)    #REQUIRED
+        alt-tier        (%tier;)    'any'
+        hardness        CDATA       #REQUIRED
+        blast-resistance CDATA      #REQUIRED
+>
+
+<!ELEMENT direction EMPTY>
+<!ATTLIST direction
+        from-attribute    NMTOKEN     #REQUIRED
+>
+
+<!ELEMENT flammable EMPTY>
+<!ATTLIST flammable
+        chance      CDATA       #REQUIRED
+        spread      CDATA       #REQUIRED
+        lava        CDATA       'true'
+        burnable    (%bool;)    'true'
+>
+
+<!ELEMENT fireproof EMPTY>
+<!ATTLIST flammable
+        fire        (%bool;)    'true'
+        lava        (%bool;)    'true'
+>
+
+
+<!ELEMENT hitbox EMPTY>
+<!ATTLIST hitbox
+        empty   (%bool;) 'false'
+        min-x   CDATA   '0'
+        min-y   CDATA   '0'
+        min-z   CDATA   '0'
+        max-x   CDATA   '1'
+        max-y   CDATA   '1'
+        max-z   CDATA   '1'
+        >
+
+<!ELEMENT collision EMPTY>
+<!ATTLIST collision
+        empty       (%bool;) 'false'
+        passthrough (%bool;) 'false'
+        min-x   CDATA   '0'
+        min-y   CDATA   '0'
+        min-z   CDATA   '0'
+        max-x   CDATA   '1'
+        max-y   CDATA   '1'
+        max-z   CDATA   '1'
+        >
+
+<!ELEMENT lighting (propagates-to*)>
+<!ATTLIST lighting
+        source      CDATA    '0'
+        sky-difuse  CDATA    '0'
+        transparent (%bool;) 'false'
+>
+
+<!ELEMENT propagates-to EMPTY>
+<!ATTLIST propagates-to 
+        direction   (%block-face;)    #REQUIRED
+        reducing    CDATA           '1'
+>
+
+
+<!ELEMENT attribute EMPTY>
+<!ATTLIST attribute
+        id          NMTOKEN     #REQUIRED
+        default     CDATA       #IMPLIED     
+>
+
+<!ELEMENT state (facing-interactor?,state-attribute*,copy-attribute*)>
+<!ATTLIST state
+        block   IDREF       #REQUIRED
+>
+
+<!ELEMENT facing-interactor (attribute)>
+<!ATTLIST facing-interactor
+        fallback    CDATA       #IMPLIED
+        opposite    (%bool;)    'false'
+>
+
+<!ELEMENT state-attribute EMPTY>
+<!ATTLIST state-attribute
+        id      NMTOKEN     #REQUIRED
+        value   CDATA       #REQUIRED
+>
+
+<!ELEMENT copy-attribute EMPTY>
+<!ATTLIST copy-attribute
+        from    NMTOKEN     #REQUIRED
+        to      NMTOKEN     #IMPLIED
+>
+
+<!-- ###################   TRAITS   ################### -->
+<!ELEMENT traits (
+        tool-conversion|always-waterlogged-source|ages-up|grows-tree|liquid|
+        extinguises-entities|contact-damage|ignites-entities|spread-fire|
+        gravity|leaves-decay|tile-entity|note-player|connection|hydration|
+        spread-block|double-block|rail
+        )+>
+
+<!ELEMENT double-block (relative-position,state,relative-position,state)>
+
+<!ELEMENT hydration EMPTY>
+<!ATTLIST hydration
+        attribute       NMTOKEN     #REQUIRED
+>
+
+<!ELEMENT tile-entity EMPTY>
+<!ATTLIST tile-entity
+        id              NMTOKEN     #REQUIRED
+>
+
+<!ELEMENT leaves-decay (supported-by)>
+<!ATTLIST leaves-decay 
+        persistent-attribute    NMTOKEN     #REQUIRED
+        distance-attribute      NMTOKEN     #REQUIRED
+>
+
+<!ELEMENT tool-conversion (state)>
+<!ATTLIST tool-conversion
+        tool    (%tools;)       #REQUIRED
+        tier    (%tier;)        'any'
+>
+
+<!ELEMENT always-waterlogged-source EMPTY>
+
+<!ELEMENT ages-up EMPTY>
+<!ATTLIST ages-up
+        attribute NMTOKEN #REQUIRED
+>
+
+<!ELEMENT grows-tree (support*)>
+<!ATTLIST grows-tree
+        age     NMTOKEN     #REQUIRED
+        tree    NMTOKEN     #REQUIRED
+        area    (1x1|2x2)   '1x1'
+        bee-chance  CDATA   '0'
+        flower-range CDATA   '0'
+>
+
+<!ELEMENT liquid (liquid-dimension-override*,liquid-collision-with*)>
+<!ATTLIST liquid
+        type                NMTOKEN     #REQUIRED
+        infinity            (%bool;)    'false'
+        falling-attribute   NMTOKEN     #REQUIRED
+        level-attribute     NMTOKEN     #REQUIRED
+        flow-distance       CDATA       #REQUIRED
+        flow-delay          CDATA       #REQUIRED
+        flow-silently       (%bool;)    'true'
+        waterlogging        (%bool;)    'false'
+>
+
+<!ELEMENT liquid-dimension-override EMPTY>
+<!ATTLIST liquid-dimension-override
+        dimension       NMTOKEN     #REQUIRED
+        flow-distance   CDATA       #REQUIRED
+        flow-delay      CDATA       #REQUIRED
+>
+
+<!ELEMENT extinguises-entities (entity-filter)*>
+<!ELEMENT ignites-entities (entity-filter)*>
+<!ATTLIST ignites-entities
+        first-contact   CDATA   #REQUIRED
+        persistence     CDATA   #REQUIRED
+>
+
+<!ELEMENT contact-damage (relative-position*,entity-filter)*>
+<!ATTLIST contact-damage
+        type        (lava|fire|magma|water|wither|thorn)      #REQUIRED
+        base        CDATA       #REQUIRED
+>
+
+<!ELEMENT entity-filter EMPTY>
+<!ATTLIST entity-filter
+        not-resistent-to        NMTOKEN     #IMPLIED
+        not-sneaking            (%bool;)    'false'
+>
+
+<!ELEMENT spread-fire EMPTY>
+<!ATTLIST spread-fire 
+        logic       (lava|fire)     #REQUIRED
+>
+
+<!ELEMENT replace-self (state)>
+<!ELEMENT replace-other (state)>
+
+<!ELEMENT liquid-collision-with  (state-attribute*,state,replace-self?,replace-other?)>
+
+<!ELEMENT gravity (stops*)>
+
+<!ELEMENT stops (state*,becomes?)>
+<!ATTLIST stops
+        position    (inside|above|under)    #REQUIRED
+        tags        NMTOKENS            #IMPLIED
+>
+
+<!ELEMENT becomes (state)>
+
+<!ELEMENT note-player (instrument+)>
+<!ATTLIST note-player
+        note            NMTOKEN         #REQUIRED
+        powered         NMTOKEN         #REQUIRED
+        instrument      NMTOKEN         #REQUIRED
+        using-hands     (%bool;)        'true'
+        using-redstone  (%bool;)        'true'
+>
+
+<!ELEMENT instrument (state)*>
+<!ATTLIST instrument
+        id      NMTOKEN     #REQUIRED
+        tags    NMTOKENS    #IMPLIED
+>
+
+<!ELEMENT connection (relative-position+,state*,solid-block*,(connect?,disconnect?))>
+<!ATTLIST connection
+        tags        NMTOKENS        #IMPLIED
+>
+
+<!ELEMENT connect (state-attribute+|(replace-self?,replace-other?))>
+<!ELEMENT disconnect (state-attribute+|(replace-self?,replace-other?))>
+
+<!ELEMENT spread-block (state,spread-to+)>
+<!ATTLIST spread-block
+        tags            NMTOKENS        #IMPLIED
+        horizontal-range CDATA          #REQUIRED
+        vertical-range  CDATA           #REQUIRED
+        source-light    CDATA           '0'
+        target-light    CDATA           '0'
+        retries         CDATA           '1'
+>
+
+<!ELEMENT spread-to (state*,except*,checking*)>
+<!ATTLIST spread-to
+        tags            NMTOKENS        #IMPLIED
+        horizontal-range CDATA          #IMPLIED
+        vertical-range  CDATA           #IMPLIED
+        source-light    CDATA           #IMPLIED
+        target-light    CDATA           #IMPLIED
+>
+
+<!ELEMENT checking (relative-position*,(is|is-not)*)>
+
+<!ELEMENT is (state*,except*)>
+<!ATTLIST is
+        tags            NMTOKENS        #IMPLIED
+>
+
+<!ELEMENT is-not ((state|solid-block)*,except*)>
+<!ATTLIST is-not
+        tags            NMTOKENS        #IMPLIED
+>
+
+<!ELEMENT rail EMPTY>
+<!ATTLIST rail
+        powered         NMTOKEN         #IMPLIED
+        direction       NMTOKEN         #REQUIRED
+        booster         (%bool;)        'false'
+        detector        (%bool;)        'false'
+        activator       (%bool;)        'false'
+>

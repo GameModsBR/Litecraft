@@ -1,0 +1,22 @@
+<!ELEMENT attributes (attribute+) >
+
+<!ELEMENT attribute (boolean|sequence|(fixed|copy)+)>
+<!ATTLIST attribute 
+        id      ID      #REQUIRED
+        default CDATA   #IMPLIED
+> 
+
+<!ELEMENT boolean EMPTY>
+<!ELEMENT sequence EMPTY>
+<!ATTLIST sequence
+        from    CDATA   #REQUIRED
+        to      CDATA   #REQUIRED
+        step    CDATA   #IMPLIED
+>
+<!ELEMENT fixed EMPTY>
+<!ATTLIST fixed value CDATA #REQUIRED>
+
+<!ELEMENT copy EMPTY>
+<!ATTLIST copy
+        from    IDREFS  #REQUIRED
+>

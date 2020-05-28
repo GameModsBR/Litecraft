@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE blocks SYSTEM "blocks.dtd">
+<blocks>
+    <block id="air">
+        <properties>
+            <lighting transparent="true"/>
+            <collision empty="true" passthrough="true"/>
+        </properties>
+    </block>
+    <block id="stone">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="granite">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="polished_granite">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="diorite">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="polished_diorite">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="andesite">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="polished_andesite">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="grass">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.6" blast-resistance="0.6"/>
+            <flammable chance="60" spread="100"/>
+        </properties>
+        <attribute id="snowy"/>
+        <traits>
+            <connection>
+                <relative-position at="up"/>
+                <state block="snow_block"/>
+                <state block="snow"/>
+                <connect>
+                    <state-attribute id="snowy" value="true"/>
+                </connect>
+                <disconnect>
+                    <state-attribute id="snowy" value="false"/>
+                </disconnect>
+            </connection>
+            <connection tags="fluid">
+                <relative-position at="up"/>
+                <solid-block>
+                    <relative-position at="down"/>
+                    <except>
+                        <state block="snow"/>
+                    </except>
+                </solid-block>
+                <connect>
+                    <replace-self>
+                        <state block="dirt"/>
+                    </replace-self>
+                </connect>
+            </connection>
+            <tool-conversion tool="shovel">
+                <state block="grass_path"/>
+            </tool-conversion>
+            <tool-conversion tool="hoe">
+                <state block="farmland"/>
+            </tool-conversion>
+            <spread-block source-light="9" horizontal-range="1" vertical-range="1" retries="4">
+                <state block="grass" />
+                <spread-to>
+                    <state block="dirt"/>
+                    <checking>
+                        <relative-position at="up"/>
+                        <is-not tags="liquid">
+                            <solid-block/>
+                        </is-not>
+                    </checking>
+                </spread-to>
+            </spread-block>
+        </traits>
+    </block>
+    <block id="mycelium">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.6" blast-resistance="0.5"/>
+        </properties>
+        <attribute id="snowy"/>
+        <traits>
+            <connection>
+                <relative-position at="up"/>
+                <state block="snow_block"/>
+                <state block="snow"/>
+                <connect>
+                    <state-attribute id="snowy" value="true"/>
+                </connect>
+                <disconnect>
+                    <state-attribute id="snowy" value="false"/>
+                </disconnect>
+            </connection>
+            <connection tags="fluid">
+                <relative-position at="up"/>
+                <solid-block>
+                    <relative-position at="down"/>
+                    <except>
+                        <state block="snow"/>
+                    </except>
+                </solid-block>
+                <connect>
+                    <replace-self>
+                        <state block="dirt"/>
+                    </replace-self>
+                </connect>
+            </connection>
+            <tool-conversion tool="shovel">
+                <state block="grass_path"/>
+            </tool-conversion>
+            <tool-conversion tool="hoe">
+                <state block="farmland"/>
+            </tool-conversion>
+            <spread-block source-light="9" horizontal-range="1" vertical-range="1" retries="4">
+                <state block="grass" />
+                <spread-to>
+                    <state block="dirt"/>
+                    <checking>
+                        <relative-position at="up"/>
+                        <is-not tags="liquid">
+                            <solid-block/>
+                        </is-not>
+                    </checking>
+                </spread-to>
+            </spread-block>
+        </traits>
+    </block>
+    <block id="dirt">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+        </properties>
+        <traits>
+            <tool-conversion tool="hoe">
+                <state block="farmland"/>
+            </tool-conversion>
+        </traits>
+    </block>
+    <block id="coarse_dirt">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+        </properties>
+    </block>
+    <block id="podzol">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+        </properties>
+        <attribute id="snowy"/>
+        <traits>
+            <connection>
+                <relative-position at="up"/>
+                <state block="snow_block"/>
+                <state block="snow"/>
+                <connect>
+                    <state-attribute id="snowy" value="true"/>
+                </connect>
+                <disconnect>
+                    <state-attribute id="snowy" value="false"/>
+                </disconnect>
+            </connection>
+        </traits>
+    </block>
+    <block id="cobblestone">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="2" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="mossy_cobblestone">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="2" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="planks">
+        <name><attribute id="burnable_wood"/> Planks</name>
+        <properties>
+            <mining tool="axe" tier="any" hardness="2" blast-resistance="3"/>
+            <flammable chance="5" spread="0" />
+        </properties>
+        <attribute id="burnable_wood"/>
+    </block>
+    <block id="fireproof_planks">
+        <name><attribute id="fireproof_wood"/> Planks</name>
+        <properties>
+            <mining tool="axe" tier="any" hardness="2" blast-resistance="3"/>
+            <fireproof/>
+        </properties>
+        <attribute id="fireproof_wood"/>
+    </block>
+    <block id="sapling">
+        <name><attribute id="burnable_wood"/> Sapling</name>
+        <properties>
+            <mining tool="any" tier="any" hardness="0" blast-resistance="0"/>
+            <lighting transparent="true"/>
+            <waterlogging flowing="pops" source="pops"/>
+            <!-- TODO -->
+            <hitbox min-x="" min-y="" min-z="" max-x="" max-y="" max-z="" />
+            <collision empty="true" passthrough="true" />
+            <support>
+                <supported-by>
+                    <relative-position at="down"/>
+                    <state block="dirt"/>
+                    <state block="podzol"/>
+                    <state block="grass"/>
+                    <state block="farmland"/>
+                </supported-by>
+            </support>
+        </properties>
+        <attribute id="burnable_wood"/>
+        <attribute id="sapling_age"/>
+        <traits>
+            <ages-up attribute="sapling_age"/>
+            <grows-tree age="sapling_age" tree="burnable_wood"/>
+        </traits>
+        <state-override type="replace">
+            <state-attribute id="burnable_wood" value="jungle" />
+            <traits>
+                <grows-tree age="sapling_age" tree="burnable_wood" area="2x2"/>
+            </traits>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="burnable_wood" value="dark_oak" />
+            <traits>
+                <grows-tree age="sapling_age" tree="burnable_wood" area="2x2">
+                    <support>
+                        <supported-by>
+                            <relative-position at="down"/>
+                            <state block="dirt"/>
+                            <state block="podzol"/>
+                            <state block="grass"/>
+                        </supported-by>
+                    </support>
+                </grows-tree>
+            </traits>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="burnable_wood" value="acacia" />
+            <traits>
+                <grows-tree age="sapling_age" tree="burnable_wood">
+                    <support>
+                        <supported-by>
+                            <relative-position at="down"/>
+                            <state block="dirt"/>
+                            <state block="podzol"/>
+                            <state block="grass"/>
+                        </supported-by>
+                    </support>
+                </grows-tree>
+            </traits>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="burnable_wood" value="oak"/>
+            <state-attribute id="burnable_wood" value="birch"/>
+            <traits>
+                <grows-tree age="sapling_age" tree="burnable_wood" bee-chance="5" flower-range="2" />
+            </traits>
+        </state-override>
+    </block>
+    <block id="bedrock"/>
+    <block id="grass_path">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.6" blast-resistance="0.65"/>
+            <lighting transparent="true">
+                <propagates-to direction="up"/>
+                <propagates-to direction="north"/>
+                <propagates-to direction="south"/>
+                <propagates-to direction="east"/>
+                <propagates-to direction="west"/>
+            </lighting>
+        </properties>
+    </block>
+    <block id="water">
+        <name>Flowing Water</name>
+        <properties>
+            <mining tool="none" tier="none" hardness="100" blast-resistance="100"/>
+            <lighting sky-difuse="1" transparent="true"/>
+            <hitbox empty="true"/>
+            <collision passthrough="true"/>
+        </properties>
+        <attribute id="liquid_falling"/>
+        <attribute id="liquid_level"/>
+        <traits>
+            <liquid type="water"
+                    falling-attribute="liquid_falling"
+                    level-attribute="liquid_level"
+                    infinity="true"
+                    flow-distance="8"
+                    flow-delay="5"
+                    waterlogging="true">
+                <liquid-collision-with>
+                    <state-attribute id="liquid_level" value="0"/>
+                    <state block="lava"/>
+                    <replace-self>
+                        <state block="stone"/>
+                    </replace-self>
+                </liquid-collision-with>
+                <liquid-collision-with>
+                    <state block="lava"/>
+                    <replace-self>
+                        <state block="cobblestone"/>
+                    </replace-self>
+                </liquid-collision-with>
+            </liquid>
+            <extinguises-entities/>
+            <contact-damage type="water" base="1">
+                <entity-filter not-resistent-to="water"/>
+            </contact-damage>
+            <connection>
+                <relative-position at="down"/>
+                <state block="soul_sand"/>
+                <connect>
+                    <replace-self>
+                        <state block="bubble_column">
+                            <state-attribute id="bubble_direction" value="up"/>
+                        </state>
+                    </replace-self>
+                </connect>
+            </connection>
+            <connection>
+                <relative-position at="down"/>
+                <state block="magma"/>
+                <connect>
+                    <replace-self>
+                        <state block="bubble_column">
+                            <state-attribute id="bubble_direction" value="down"/>
+                        </state>
+                    </replace-self>
+                </connect>
+            </connection>
+        </traits>
+        <state-override type="replace">
+            <state-attribute id="liquid_level" value="0"/>
+            <name>Water Source</name>
+        </state-override>
+    </block>
+    <block id="lava">
+        <name>Flowing Lava</name>
+        <properties>
+            <mining tool="none" tier="none" hardness="100" blast-resistance="100"/>
+            <lighting transparent="true" source="15" />
+            <hitbox empty="true"/>
+            <collision passthrough="true"/>
+        </properties>
+        <attribute id="liquid_falling"/>
+        <attribute id="liquid_level"/>
+        <traits>
+            <liquid type="lava"
+                    falling-attribute="liquid_falling"
+                    level-attribute="liquid_level"
+                    flow-distance="4"
+                    flow-delay="30"
+                    flow-silently="false">
+                <liquid-dimension-override dimension="nether" flow-distance="8" flow-delay="9"/>
+                <liquid-collision-with>
+                    <state-attribute id="liquid_level" value="0"/>
+                    <state block="water"/>
+                    <replace-self>
+                        <state block="obsidian"/>
+                    </replace-self>
+                </liquid-collision-with>
+                <liquid-collision-with>
+                    <state block="water"/>
+                    <replace-self>
+                        <state block="cobblestone"/>
+                    </replace-self>
+                </liquid-collision-with>
+            </liquid>
+            <ignites-entities first-contact="300" persistence="2">
+                <entity-filter not-resistent-to="fire"/>
+            </ignites-entities>
+            <contact-damage type="lava" base="4">
+                <entity-filter not-resistent-to="fire"/>
+            </contact-damage>
+            <spread-fire logic="lava"/>
+        </traits>
+        <state-override type="replace">
+            <state-attribute id="liquid_level" value="0"/>
+            <name>Lava Source</name>
+        </state-override>
+    </block>
+    <block id="sand">
+        <name><attribute id="sand_color"/> Sand</name>
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+        </properties>
+        <attribute id="sand_color"/>
+        <traits>
+            <gravity/>
+        </traits>
+        <state-override type="replace">
+            <state-attribute id="sand_color" value="yellow"/>
+            <name>Sand</name>
+        </state-override>
+    </block>
+    <block id="red_sand">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+        </properties>
+        <traits>
+            <gravity/>
+        </traits>
+    </block>
+    <block id="gravel">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.6" blast-resistance="0.6"/>
+        </properties>
+        <traits>
+            <gravity/>
+        </traits>
+    </block>
+    <block id="gold_ore">
+        <properties>
+            <mining tool="pickaxe" tier="iron" hardness="3" blast-resistance="3"/>
+        </properties>
+    </block>
+    <block id="iron_ore">
+        <properties>
+            <mining tool="pickaxe" tier="stone" hardness="3" blast-resistance="3"/>
+        </properties>
+    </block>
+    <block id="coal_ore">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="3" blast-resistance="3"/>
+        </properties>
+    </block>
+    <block id="log">
+        <name><attribute id="burnable_wood"/> Log</name>
+        <properties>
+            <mining tool="axe" tier="any" hardness="2" blast-resistance="2"/>
+            <flammable spread="5" chance="5"/>
+        </properties>
+        <attribute id="stripped"/>
+        <attribute id="burnable_wood"/>
+        <attribute id="axis"/>
+        <attribute id="bark"/>
+        <state-override type="add">
+            <state-attribute id="stripped" value="false"/>
+            <traits>
+                <tool-conversion tool="axe">
+                    <state block="log">
+                        <state-attribute id="stripped" value="true"/>
+                        <copy-attribute from="burnable_wood"/>
+                        <copy-attribute from="axis"/>
+                        <copy-attribute from="bark"/>
+                    </state>
+                </tool-conversion>
+            </traits>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="stripped" value="true"/>
+            <state-attribute id="bark" value="log"/>
+            <name>Stripped <attribute id="burnable_wood"/> Log</name>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="stripped" value="true"/>
+            <state-attribute id="bark" value="full"/>
+            <name>Stripped <attribute id="burnable_wood"/> Wood</name>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="stripped" value="false"/>
+            <state-attribute id="bark" value="wood"/>
+            <name><attribute id="burnable_wood"/> Wood</name>
+        </state-override>
+    </block>
+    <block id="fireproof_log">
+        <name><attribute id="fireproof_wood"/> Stem</name>
+        <properties>
+            <mining tool="axe" tier="any" hardness="1" blast-resistance="2"/>
+            <fireproof/>
+        </properties>
+        <attribute id="stripped"/>
+        <attribute id="fireproof_wood"/>
+        <attribute id="axis"/>
+        <attribute id="bark"/>
+        <state-override type="add">
+            <state-attribute id="stripped" value="false"/>
+            <traits>
+                <tool-conversion tool="axe">
+                    <state block="fireproof_log">
+                        <state-attribute id="stripped" value="true"/>
+                        <copy-attribute from="fireproof_wood"/>
+                        <copy-attribute from="axis"/>
+                        <copy-attribute from="bark"/>
+                    </state>
+                </tool-conversion>
+            </traits>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="stripped" value="true"/>
+            <state-attribute id="bark" value="log"/>
+            <name>Stripped <attribute id="fireproof_wood"/> Stem</name>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="stripped" value="true"/>
+            <state-attribute id="bark" value="full"/>
+            <name>Stripped <attribute id="fireproof_wood"/> Hyphae</name>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="stripped" value="false"/>
+            <state-attribute id="bark" value="wood"/>
+            <name><attribute id="fireproof_wood"/> Hyphae</name>
+        </state-override>
+    </block>
+    <block id="leaves">
+        <properties>
+            <mining tool="shears" tier="any" hardness="0.2" blast-resistance="0.2" alt-tool="hoe"/>
+            <flammable chance="30" spread="60"/>
+            <lighting sky-difuse="1" transparent="true"/>
+        </properties>
+        <attribute id="leaves_distance"/>
+        <attribute id="leaves_persistent"/>
+        <traits>
+            <!-- TODO: Does nether stem supports normal leaves? -->
+            <leaves-decay persistent-attribute="leaves_persistent" distance-attribute="leaves_distance">
+                <supported-by>
+                    <state block="log"/>
+                </supported-by>
+            </leaves-decay>
+        </traits>
+    </block>
+    <block id="sponge">
+        <properties>
+            <mining tool="hoe" tier="any" hardness="0.6" blast-resistance="0.6"/>
+        </properties>
+    </block>
+    <block id="glass">
+        <properties>
+            <mining tool="any" tier="any" hardness="0.3" blast-resistance="0.3"/>
+            <lighting transparent="true"/>
+        </properties>
+    </block>
+    <block id="stained_glass">
+        <name><attribute id="color"/> Stained Glass</name>
+        <properties>
+            <mining tool="any" tier="any" hardness="0.3" blast-resistance="0.3"/>
+            <lighting transparent="true"/>
+        </properties>
+        <attribute id="color"/>
+    </block>
+    <block id="lapis_lazuli_ore">
+        <properties>
+            <mining tool="pickaxe" tier="stone" hardness="3" blast-resistance="3"/>
+        </properties>
+    </block>
+    <block id="lapis_lazuli_block">
+        <properties>
+            <mining tool="pickaxe" tier="stone" hardness="3" blast-resistance="3"/>
+        </properties>
+    </block>
+    <block id="dispenser">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="3.5" blast-resistance="3.5"/>
+            <direction from-attribute="block_face"/>
+        </properties>
+        <attribute id="powered"/>
+        <attribute id="block_face"/>
+        <traits>
+            <tile-entity id="dispenser"/>
+        </traits>
+    </block>
+    <block id="sandstone">
+        <name><attribute id="sandstone_variant"/> <attribute id="sand_color"/> Sandstone</name>
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="0.8" blast-resistance="0.8"/>
+        </properties>
+        <attribute id="sandstone_variant"/>
+        <attribute id="sand_color"/>
+        <state-override type="replace">
+            <state-attribute id="sand_color" value="yellow"/>
+            <name><attribute id="sandstone_variant"/> Sandstone</name>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="sand_color" value="yellow"/>
+            <state-attribute id="sandstone_variant" value="normal"/>
+            <name>Sandstone</name>
+        </state-override>
+        <state-override type="replace">
+            <state-attribute id="sand_color" value="red"/>
+            <state-attribute id="sandstone_variant" value="normal"/>
+            <name>Red Sandstone</name>
+        </state-override>
+    </block>
+    <block id="noteblock">
+        <properties>
+            <mining tool="axe" tier="any" hardness="0.8" blast-resistance="0.8"/>
+            <flammable chance="0" spread="0"/>
+        </properties>
+        <attribute id="note"/>
+        <attribute id="powered"/>
+        <attribute id="instrument"/>
+        <traits>
+            <note-player note="note" powered="powered" instrument="instrument">
+                <instrument id="bass" tags="woods"/>
+                <instrument id="snare">
+                    <state block="sand"/>
+                    <state block="gravel"/>
+                    <state block="concrete_powder"/>
+                </instrument>
+                <instrument id="hat" tags="glasses"/>
+                <instrument id="basedrum" tags="stones">
+                    <state block="netherrack"/>
+                    <state block="crimson_nylium"/>
+                    <state block="warped_nylium"/>
+                </instrument>
+                <instrument id="bell">
+                    <state block="gold_block"/>
+                </instrument>
+                <instrument id="flute">
+                    <state block="clay"/>
+                </instrument>
+                <instrument id="chime">
+                    <state block="packed_ice"/>
+                </instrument>
+                <instrument id="guitar" tags="wools"/>
+                <instrument id="xylophone">
+                    <state block="bone_block"/>
+                </instrument>
+                <instrument id="iron_xylophone">
+                    <state block="iron_block"/>
+                </instrument>
+                <instrument id="cow_bell">
+                    <state block="soul_sand"/>
+                </instrument>
+                <instrument id="didgeridoo">
+                    <state block="pumpkin"/>
+                </instrument>
+                <instrument id="bit">
+                    <state block="emerald_block"/>
+                </instrument>
+                <instrument id="snare">
+                    <state block="hay_block"/>
+                </instrument>
+                <instrument id="piano"/>
+            </note-player>
+        </traits>
+    </block>
+    <block id="snow_block">
+        <properties>
+            <mining tool="shovel" tier="wooden" hardness="0.2" blast-resistance="0.2"/>
+            <!-- TODO hitbox, collision-box -->
+        </properties>
+    </block>
+    <block id="snow">
+        <properties>
+            <mining tool="shovel" tier="wooden" hardness="0.1" blast-resistance="0.1"/>
+            <lighting transparent="true"/>
+            <support>
+                <supported-by>
+                    <solid-block/>
+                </supported-by>
+                <unsupported-by tags="ices"/>
+            </support>
+        </properties>
+        <attribute id="snow_layers"/>
+        <traits>
+            <gravity/>
+        </traits>
+    </block>
+    <block id="farmland">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.6" blast-resistance="0.6"/>
+            <lighting transparent="true">
+                <propagates-to direction="up"/>
+                <propagates-to direction="north"/>
+                <propagates-to direction="south"/>
+                <propagates-to direction="east"/>
+                <propagates-to direction="west"/>
+            </lighting>
+        </properties>
+        <attribute id="moisture"/>
+        <traits>
+            <hydration attribute="moisture"/>
+        </traits>
+    </block>
+    <block id="obsidian">
+        <properties>
+            <mining tool="pickaxe" tier="diamond" hardness="50" blast-resistance="1200"/>
+        </properties>
+    </block>
+    <block id="glowing_obsidian">
+        <properties>
+            <mining tool="pickaxe" tier="diamond" hardness="50" blast-resistance="1200"/>
+            <lighting source="12"/>
+        </properties>
+    </block>
+    <block id="crying_obsidian">
+        <properties>
+            <mining tool="pickaxe" tier="diamond" hardness="50" blast-resistance="1200"/>
+            <lighting source="10"/>
+        </properties>
+    </block>
+    <block id="concrete_powder">
+        <name><attribute id="color"/> Concrete Powder</name>
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+        </properties>
+        <attribute id="color"/>
+        <traits>
+            <gravity>
+                <stops position="inside">
+                    <state block="water"/>
+                    <becomes>
+                        <state block="concrete">
+                            <copy-attribute from="color"/>
+                        </state>
+                    </becomes>
+                </stops>
+            </gravity>
+        </traits>
+    </block>
+    <block id="concrete">
+        <name><attribute id="color"/> Concrete</name>
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1.8" blast-resistance="1.8"/>
+        </properties>
+        <attribute id="color"/>
+    </block>
+    <block id="netherrack">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="0.4" blast-resistance="0.4"/>
+        </properties>
+    </block>
+    <block id="warped_nylium">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1" blast-resistance="1"/>
+        </properties>
+        <traits>
+            <connection>
+                <relative-position at="up"/>
+                <solid-block/>
+                <connect>
+                    <replace-self>
+                        <state block="netherrack"/>
+                    </replace-self>
+                </connect>
+            </connection>
+        </traits>
+    </block>
+    <block id="crimson_nylium">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="1" blast-resistance="1"/>
+        </properties>
+        <traits>
+            <connection>
+                <relative-position at="up"/>
+                <solid-block/>
+                <connect>
+                    <replace-self>
+                        <state block="netherrack"/>
+                    </replace-self>
+                </connect>
+            </connection>
+        </traits>
+    </block>
+    <block id="gold_block">
+        <properties>
+            <mining tool="pickaxe" tier="iron" hardness="3" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="clay">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.6" blast-resistance="0.6"/>
+        </properties>
+    </block>
+    <block id="packed_ice">
+        <properties>
+            <mining tool="pickaxe" tier="any" hardness="0.5" blast-resistance="0.5"/>
+            <velocity slipperiness="0.98"/>
+        </properties>
+    </block>
+    <block id="bone_block">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="2" blast-resistance="2"/>
+        </properties>
+        <attribute id="axis"/>
+    </block>
+    <block id="iron_block">
+        <properties>
+            <mining tool="pickaxe" tier="stone" hardness="5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="pumpkin">
+        <properties>
+            <mining tool="axe" tier="any" hardness="1" blast-resistance="1"/>
+        </properties>
+        <traits>
+            <tool-conversion tool="shears">
+                <state block="carved_pumpkin">
+                    <facing-interactor>
+                        <attribute id="facing"/>
+                    </facing-interactor>
+                </state>
+            </tool-conversion>
+        </traits>
+    </block>
+    <block id="carved_pumpkin">
+        <properties>
+            <mining tool="axe" tier="any" hardness="1" blast-resistance="1"/>
+        </properties>
+        <attribute id="facing"/>
+    </block>
+    <block id="jack_o_lantern">
+        <properties>
+            <mining tool="axe" tier="any" hardness="1" blast-resistance="1"/>
+            <lighting source="15"/>
+        </properties>
+    </block>
+    <block id="soul_sand">
+        <properties>
+            <mining tool="shovel" tier="any" hardness="0.5" blast-resistance="0.5"/>
+            <!-- TODO custom heights -->
+            <collision />
+            <hitbox />
+            <lighting transparent="true"/>
+            <velocity multiplier="0.4"/>
+        </properties>
+    </block>
+    <block id="magma">
+        <properties>
+            <mining tool="pickaxe" tier="wooden" hardness="0.5" blast-resistance="0.5"/>
+            <lighting source="3" />
+        </properties>
+        <traits>
+            <contact-damage type="magma" base="1">
+                <relative-position at="up"/>
+                <entity-filter not-resistent-to="fire" not-sneaking="true" />
+            </contact-damage>
+        </traits>
+    </block>
+    <block id="bubble_column">
+        <properties>
+            <mining tool="none" tier="none" hardness="100" blast-resistance="100"/>
+            <hitbox empty="true"/>
+            <collision passthrough="true"/>
+            <waterlogging flowing="pass" source="pass"/>
+        </properties>
+        <attribute id="bubble_direction"/>
+        <traits>
+            <always-waterlogged-source/>
+            <connection>
+                <relative-position at="down"/>
+                <state block="soul_sand"/>
+                <state block="magma"/>
+                <disconnect>
+                    <replace-self>
+                        <state block="water">
+                            <state-attribute id="liquid_falling" value="false"/>
+                            <state-attribute id="liquid_level" value="0"/>
+                        </state>
+                    </replace-self>
+                </disconnect>
+            </connection>
+        </traits>
+    </block>
+    <block id="emerald_block">
+        <properties>
+            <mining tool="pickaxe" tier="iron" hardness="5" blast-resistance="6"/>
+        </properties>
+    </block>
+    <block id="hay_block">
+        <properties>
+            <mining tool="hoe" tier="any" hardness="0.5" blast-resistance="0.5"/>
+            <flammable chance="60" spread="20"/>
+        </properties>
+        <attribute id="axis"/>
+    </block>
+    <block id="bed">
+        <properties>
+            <mining tool="any" tier="any" hardness="0.2" blast-resistance="0.2"/>
+            <lighting transparent="true" />
+            <!-- TODO boxes -->
+            <hitbox/>
+            <collision/>
+            <flammable chance="0" spread="0"/>
+            <velocity vertical-bounciness="66" fall-damage-multiplier="0.5" />
+        </properties>
+        <attribute id="facing"/>
+        <attribute id="occupied"/>
+        <attribute id="bed_part"/>
+        <attribute id="color"/>
+        <traits>
+            <double-block>
+                <relative-position at="behind"/>
+                <state block="bed">
+                    <state-attribute id="bed_part" value="head"/>
+                </state>
+                <relative-position at="front"/>
+                <state block="bed">
+                    <state-attribute id="bed_part" value="foot"/>
+                </state>
+            </double-block>
+        </traits>
+    </block>
+    <block id="powered_rail">
+        <properties>
+            <mining tool="pickaxe" tier="any" hardness="0.7" blast-resistance="0.7"/>
+            <lighting transparent="true"/>
+            <support>
+                <supported-by>
+                    <solid-block/>
+                </supported-by>
+            </support>
+        </properties>
+        <attribute id="powered"/>
+        <attribute id="straight_rail"/>
+        <traits>
+            <rail direction="straight_rail" powered="powered" booster="true"/>
+        </traits>
+    </block>
+    <block id="detector_rail">
+        <properties>
+            <mining tool="pickaxe" tier="any" hardness="0.7" blast-resistance="0.7"/>
+            <lighting transparent="true"/>
+            <support>
+                <supported-by>
+                    <solid-block/>
+                </supported-by>
+            </support>
+        </properties>
+        <attribute id="powered"/>
+        <attribute id="straight_rail"/>
+        <traits>
+            <rail direction="straight_rail" powered="powered" detector="true"/>
+        </traits>
+    </block>
+    <block id="rail">
+        <properties>
+            <mining tool="pickaxe" tier="any" hardness="0.7" blast-resistance="0.7"/>
+            <lighting transparent="true"/>
+            <support>
+                <supported-by>
+                    <solid-block/>
+                </supported-by>
+            </support>
+        </properties>
+        <attribute id="turning_rail"/>
+        <traits>
+            <rail direction="turning_rail" />
+        </traits>
+    </block>
+    <block id="activator_rail">
+        <properties>
+            <mining tool="pickaxe" tier="any" hardness="0.7" blast-resistance="0.7"/>
+            <lighting transparent="true"/>
+            <support>
+                <supported-by>
+                    <solid-block/>
+                </supported-by>
+            </support>
+        </properties>
+        <attribute id="powered"/>
+        <attribute id="straight_rail"/>
+        <traits>
+            <rail direction="straight_rail" powered="powered" activator="true"/>
+        </traits>
+    </block>
+</blocks>
