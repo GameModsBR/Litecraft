@@ -34,7 +34,14 @@ allprojects {
 
         sonarqube {
             properties {
-                property("sonar.sources", "src")
+                property("sonar.sources", "src/main")
+                property("sonar.tests", "src/test")
+                if (this != rootProject) {
+                    property(
+                        "sonar.coverage.jacoco.xmlReportPaths",
+                        "$buildDir/reports/jacoco/test/jacocoTestReport.xml".replace('/', '\\')
+                    )
+                }
             }
         }
         
@@ -131,19 +138,20 @@ sonarqube {
     properties {
         property("sonar.scm.provider", "git")
         //property("sonar.jacoco.reportPaths", allTestCoverageFile)
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.login", "<secret>")
-        property("sonar.organization", "gamemods")
-        property("sonar.projectKey","GameModsBR_Litecraft")
-        property("sonar.projectName", "Litecraft")
-        property("sonar.java.source", "14")
+        property("sonar.host.url", project.findProperty("litecraft.sonar.host.url") ?: System.getenv("litecraft_sonar_host_url"))
+        property("sonar.login", project.findProperty("litecraft.sonar.login.token") ?: System.getenv("litecraft_sonar_login_token")?.takeIf { it.isNotBlank() } ?: System.getenv("SONAR_TOKEN"))
+        property("sonar.organization", project.findProperty("litecraft.sonar.organization") ?: System.getenv("litecraft_sonar_organization"))
+        property("sonar.projectKey",project.findProperty("litecraft.sonar.projectKey") ?: System.getenv("litecraft_sonar_projectKey"))
+        property("sonar.projectName", project.findProperty("litecraft.sonar.projectName") ?: System.getenv("litecraft_sonar_projectName"))
+        property("sonar.rootModuleName", project.findProperty("litecraft.sonar.rootModuleName") ?: System.getenv("litecraft_sonar_rootModuleName"))
         property("sonar.cpd.cross_project", true)
-        property("sonar.rootModuleName", "litecraft")
+        property("sonar.java.source", "14")
         //property("sonar.java.binaries", "build/libs/xyz-0.0.1-SNAPSHOT.jar")
-        //property("sonar.java.coveragePlugin", "jacoco")
-        //property("sonar.tests", "src/test")
+        property("sonar.java.coveragePlugin", "jacoco")
+        property("sonar.sources", "src/main")
+        property("sonar.tests", "src/test")
         //property("sonar.java.test.binaries", "build/classes/java/test")
-        //property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/codeCoverageReport.xml")
     }
 }
 
@@ -172,6 +180,9 @@ kotlin.sourceSets {
 tasks.register<JacocoReport>("codeCoverageReport") {
     // If a subproject applies the 'jacoco' plugin, add the result it to the report
     subprojects {
+        if (path != ":api" && !path.startsWith(":api:jigsaw")) {
+            dependsOn("$path:jacocoTestReport")
+        }
         val subproject = this
         subproject.plugins.withType<JacocoPlugin>().configureEach {
             subproject.tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
@@ -184,9 +195,9 @@ tasks.register<JacocoReport>("codeCoverageReport") {
             // you may want to set up a task dependency between them as shown below.
             // Note that this requires the `test` tasks to be resolved eagerly (see `forEach`) which
             // may have a negative effect on the configuration time of your build.
-            subproject.tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.forEach {
-                rootProject.tasks["codeCoverageReport"].dependsOn(it)
-            }
+            //subproject.tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.forEach {
+            //    rootProject.tasks["codeCoverageReport"].dependsOn(it)
+            //}
         }
     }
 
@@ -200,4 +211,8 @@ tasks.register<JacocoReport>("codeCoverageReport") {
         // without any external tools
         html.isEnabled = true
     }
+}
+
+tasks.named("sonarqube") {
+    dependsOn("codeCoverageReport")
 }

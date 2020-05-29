@@ -1,9 +1,9 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Snapshot Build
+name: Full Sonar Analyses
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -18,5 +18,7 @@ jobs:
         java-version: 14
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Build and Analyze with sonar
+      run: ./gradlew sonarqube
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
