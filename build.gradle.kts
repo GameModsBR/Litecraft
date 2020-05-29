@@ -139,7 +139,7 @@ sonarqube {
         property("sonar.scm.provider", "git")
         //property("sonar.jacoco.reportPaths", allTestCoverageFile)
         property("sonar.host.url", project.findProperty("litecraft.sonar.host.url") ?: System.getenv("litecraft_sonar_host_url"))
-        property("sonar.login", project.findProperty("litecraft.sonar.login.token") ?: System.getenv("litecraft_sonar_login_token")?.takeIf { it.isNotBlank() } ?: System.getenv("SONAR_TOKEN"))
+        property("sonar.login", project.findProperty("litecraft.sonar.login.token")?.takeUnless { it.toString().startsWith("<secret") } ?: System.getenv("litecraft_sonar_login_token")?.takeIf { it.isNotBlank() } ?: System.getenv("SONAR_TOKEN"))
         property("sonar.organization", project.findProperty("litecraft.sonar.organization") ?: System.getenv("litecraft_sonar_organization"))
         property("sonar.projectKey",project.findProperty("litecraft.sonar.projectKey") ?: System.getenv("litecraft_sonar_projectKey"))
         property("sonar.projectName", project.findProperty("litecraft.sonar.projectName") ?: System.getenv("litecraft_sonar_projectName"))
