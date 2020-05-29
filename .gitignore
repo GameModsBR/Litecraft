@@ -8,6 +8,7 @@
 .idea/**/hotswap_agent.xml
 .idea/**/$CACHE_FILES$
 build
+out
 /run
 *.iws
 

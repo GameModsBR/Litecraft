@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.3.72"
     id("org.sonarqube") version "2.8"
-    //jacoco
+    jacoco
 }
 
 allprojects {
@@ -22,6 +22,10 @@ allprojects {
 
         if (!plugins.hasPlugin("org.sonarqube")) {
             apply(plugin = "org.sonarqube")
+        }
+        
+        if (!plugins.hasPlugin("jacoco")) {
+            apply(plugin = "jacoco")
         }
 
         sonarqube {
@@ -82,6 +86,29 @@ allprojects {
             
             testImplementation("org.hamcrest:hamcrest:2.2")
             testImplementation("com.natpryce:hamkrest:1.7.0.3")
+        }
+
+        tasks.withType<Test> {
+            useJUnitPlatform()
+            testLogging.showStandardStreams = true
+            testLogging {
+                events("PASSED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR")
+            }
+        }
+
+        jacoco {
+            //toolVersion = jacocoVersion
+            reportsDir = file("$buildDir/reports/jacoco")
+        }
+
+        tasks {
+            named<JacocoReport>("jacocoTestReport") {
+                classDirectories.setFrom(files("${buildDir}/classes"))
+                reports {
+                    xml.isEnabled = true
+                    html.isEnabled = true
+                }
+            }
         }
     }
     
