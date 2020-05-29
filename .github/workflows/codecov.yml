@@ -19,10 +19,18 @@ jobs:
       run: chmod +x gradlew
     - name: Build and generate coverage report
       run: ./gradlew codeCoverageReport
+    - name: ls 1
+      run: ls build/
+    - name: ls 2
+      run: ls build/reports/
+    - name: ls 3
+      run: ls build/reports/jacoco
+    - name: cat
+      run: cat build/reports/jacoco/codeCoverageReport.xml
     - uses: codecov/codecov-action@v1
       with:
         #token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        file: ./build/reports/jacoco/codeCoverageReport.xml # optional
+        file: build/reports/jacoco/codeCoverageReport.xml
         flags: unittests # optional
         #name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
