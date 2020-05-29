@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Sonar for Pull Requests
+name: Sonar for External Pull Requests
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -10,6 +10,8 @@ on: [pull_request]
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name != github.repository
+    
     steps:
     - uses: actions/checkout@v2
       with:
