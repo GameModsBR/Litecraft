@@ -6,6 +6,8 @@ plugins {
     jacoco
 }
 
+val skipJacoco = setOf(":api")
+
 allprojects {
     group = "br.com.gamemods"
     version = "0.1.0-SNAPSHOT"
@@ -24,7 +26,9 @@ allprojects {
             apply(plugin = "org.sonarqube")
         }
         
-        if (!plugins.hasPlugin("jacoco")) {
+        val skipJacoco = path.startsWith(":api:jigsaw") || path in skipJacoco
+        
+        if (!skipJacoco && !plugins.hasPlugin("jacoco")) {
             apply(plugin = "jacoco")
         }
 
@@ -95,18 +99,21 @@ allprojects {
                 events("PASSED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR")
             }
         }
+        
+        if (plugins.hasPlugin("jacoco")) {
+            jacoco {
+                //toolVersion = jacocoVersion
+                reportsDir = file("$buildDir/reports/jacoco")
+            }
 
-        jacoco {
-            //toolVersion = jacocoVersion
-            reportsDir = file("$buildDir/reports/jacoco")
-        }
-
-        tasks {
-            named<JacocoReport>("jacocoTestReport") {
-                classDirectories.setFrom(files("${buildDir}/classes"))
-                reports {
-                    xml.isEnabled = true
-                    html.isEnabled = true
+            tasks {
+                named<JacocoReport>("jacocoTestReport") {
+                    dependsOn("test")
+                    classDirectories.setFrom(files("${buildDir}/classes"))
+                    reports {
+                        xml.isEnabled = true
+                        html.isEnabled = true
+                    }
                 }
             }
         }
@@ -162,7 +169,6 @@ kotlin.sourceSets {
 // that `test` (or other tasks generating code coverage) run before generating the report.
 // You can achieve this by calling the `test` lifecycle task manually
 // $ ./gradlew test codeCoverageReport
-/*
 tasks.register<JacocoReport>("codeCoverageReport") {
     // If a subproject applies the 'jacoco' plugin, add the result it to the report
     subprojects {
@@ -195,4 +201,3 @@ tasks.register<JacocoReport>("codeCoverageReport") {
         html.isEnabled = true
     }
 }
-*/
