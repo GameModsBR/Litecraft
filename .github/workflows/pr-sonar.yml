@@ -10,6 +10,7 @@ on: [pull_request]
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
+    if: 1 == 2
     steps:
     - uses: actions/checkout@v2
       with:
