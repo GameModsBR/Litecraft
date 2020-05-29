@@ -1,3 +1,9 @@
+gradle.allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
 rootProject.name = "litecraft"
 
 include(

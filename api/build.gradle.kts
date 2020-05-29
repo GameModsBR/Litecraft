@@ -5,6 +5,7 @@ plugins {
 subprojects {
     if (!path.startsWith(":api:jigsaw")) {
         apply(plugin = "kotlin")
+        apply(plugin = "jacoco")
 
         if (path != ":api:core") {
             dependencies {
