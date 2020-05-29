@@ -6,7 +6,7 @@ name: Full Sonar Analyses
 on: [push]
 
 jobs:
-  build:
+  sonar-from-branch:
 
     runs-on: ubuntu-latest
     
